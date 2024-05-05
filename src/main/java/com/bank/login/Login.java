@@ -45,7 +45,7 @@ public class Login extends HttpServlet {
 	    String sessionID = null;
 
         HttpSession session = request.getSession();
-        session.setAttribute(password, session);
+       // session.setAttribute(password, session);
 		try {
 		    Connection con = null;
 		    con = JDBC.getConnection();
@@ -60,6 +60,7 @@ public class Login extends HttpServlet {
 		      }
 		      System.out.println(sessionID);
 		      session.setAttribute("userID", sessionID);
+		      System.out.println(" geeting seession id = "+ sessionID);
 	        
 		    RequestDispatcher rd =null;
 			   if(authenticate(user,password))
@@ -68,7 +69,7 @@ public class Login extends HttpServlet {
 					   System.out.println(" userstatus  accepted" );
 						  rd= request.getRequestDispatcher("home.jsp");
 				   }
-				   else if(userStatus(user).equalsIgnoreCase("onReview")) {
+				   else if(userStatus(user).equalsIgnoreCase("OnReview")) {
 					   System.out.println(" under review ");
 					   rd = request.getRequestDispatcher("OnReview.jsp");
 				   }
@@ -81,13 +82,15 @@ public class Login extends HttpServlet {
 				   System.out.println(" security");
 				 rd= request.getRequestDispatcher("login.jsp");
 			   }
-			    rd.forward(request, response);
+			   rd.forward(request, response);
 			    
 		 }catch(Exception e) {
 				e.printStackTrace(); 
 			}
 }
 
+	
+	//check username and password correct 
 	private boolean authenticate(String user, String password) {
 		System.out.println("within function ");
 		String user_id = null;
@@ -105,19 +108,19 @@ public class Login extends HttpServlet {
 
 	    if(rs.next()) {
 	    	System.out.println("function true");
-	    	//ID = rs.getString("id");
 	    	return true ;
 	      }
 		}catch(SQLException e ) {
-			System.out.println("exceotpio ");
+			System.out.println("exception ");
 			e.printStackTrace();
 		}
 		return false;
 	}
 
 	
+	//check status
 	private String userStatus(String user) {
-		System.out.println("within application status ");
+		System.out.println("within application status");
 		try {
 			String userMob = user;
 			System.out.println(" user Id " + user);
@@ -126,8 +129,6 @@ public class Login extends HttpServlet {
 			String id =null;
            Connection con = null;
            con = JDBC.getConnection();
-		   ServletRequest session = null;
-		   session.setAttribute("userId", id);
           
           PreparedStatement ps = con.prepareStatement("SELECT * FROM users INNER join application_status on users.id = application_status.user_id and users.mobileNo = "+ userMob );
           
@@ -145,7 +146,7 @@ public class Login extends HttpServlet {
 
 	        if(status.equalsIgnoreCase("Accepted")) {
 	        	return "accepted";
-	        }else if(status.equalsIgnoreCase("onReview")) {
+	        }else if(status.equalsIgnoreCase("OnReview")) {
 	        	return "OnReview";
 	        }
 	        else {

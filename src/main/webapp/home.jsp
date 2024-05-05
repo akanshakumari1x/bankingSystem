@@ -19,9 +19,9 @@
 </nav> -->
 
 <% String username = (String) session.getAttribute("userID"); %>
-<input type="text" value="${username }"  >
 
 <p>Username: ${username}</p>
+<h3>Hi <%=username %>, Login successful.</h3>
 
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
@@ -36,15 +36,15 @@
        <div class="row">
           <div class="col-lg-6">
           
-<a href="checkBalance.jsp?" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">check Balance</a>
+<a href="checkBalance.jsp?sendingId=<%=username %>"class="btn btn-primary btn-lg active" role="button" aria-pressed="true">check Balance</a>
 <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Withdraw money</a>
-<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transaction  history </a>
+<a href="transaction.jsp?sendingId=<%= username %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transaction  history </a>
             </div>
             </div><br><br>
            <div> 
             <div class="col-lg-6">
           
-<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transfer money </a>
+<a href="transferMoney.jsp?sendingId=<%=username %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transfer money </a>
 <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">User Profile</a>
 <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Request to close account</a>
             </div>

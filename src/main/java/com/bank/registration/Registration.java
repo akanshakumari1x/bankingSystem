@@ -172,7 +172,7 @@ public class Registration extends HttpServlet {
 		   		try {
 		   			System.out.println("within status");
 		   			conn = JDBC.getConnection();
-		   			String status = "On review";
+		   			String status = "OnReview";
 		   			String userId = uuid;
 		   			String unique_id = UUID.randomUUID().toString();
 		   			PreparedStatement ps = conn.prepareStatement("insert into application_status(application_id,user_id,application_status) values(?,?,?)");
@@ -190,7 +190,34 @@ public class Registration extends HttpServlet {
 		   		   }catch(Exception e) {
 		   			e.printStackTrace();
 		   		  }
-	           } catch(Exception e){
+		   		
+		   		//insert data to user_wallet table 
+
+	   			Connection con11 = null;
+		   		try {
+		   			System.out.println("within user_wallet");
+		   			con11 = JDBC.getConnection();
+		   			int amount = 500;
+		   			String userId = uuid;
+		   			String unique_id = UUID.randomUUID().toString();
+		   			PreparedStatement ps = con11.prepareStatement("insert into user_wallet(wallet_id,user_id,amount) values(?,?,?)");
+		   			ps.setString(1, unique_id);
+		   			ps.setString(2, userId);
+		   			ps.setInt(3, amount);
+		   			
+		   			int rowCnt = ps.executeUpdate();
+		   			if(rowCnt >0) {
+		   				System.out.println("Insert data successfully in userwallet table");
+		   			}else
+		   			{
+		   				System.out.println("something went wrong");
+		   			}
+		   		   }catch(Exception e) {
+		   			e.printStackTrace();
+		   		  }
+		  
+	           } 
+		       catch(Exception e){
 	           e.printStackTrace();
 		     }
 		
