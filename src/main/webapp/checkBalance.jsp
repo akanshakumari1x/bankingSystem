@@ -18,10 +18,7 @@
 <%! String url = "jdbc:mysql://localhost:3306/bankingsystem"; %>
 <%! String uid = "root"; %>
 <%! String psw = ""; %>
-<% String sql = "Select * from user_wallet where user_id = '" + id +"'" ;%>
-
-
-
+<%  String sql = "Select * from user_wallet where user_id = '" + id +"'" ;%>
 
 <%
 Connection con = null;

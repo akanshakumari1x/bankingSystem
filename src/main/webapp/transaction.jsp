@@ -18,8 +18,62 @@
 <%! String url = "jdbc:mysql://localhost:3306/bankingsystem"; %>
 <%! String uid = "root"; %>
 <%! String psw = ""; %>
-<% String sql = "Select * from user_wallet where id = '" + id +"'" ; %>
+<% String sql = "Select * from user_wallet where receiver_id =" + id ; %>
 
-<h1>HEloo </h1>
+<h1>HEloo <%=sql %> </h1>
+
+<%
+Connection con = null;
+PreparedStatement ps;
+ResultSet rs ;
+
+try{
+
+Class.forName(driver);
+con = DriverManager.getConnection(url,uid,psw);
+ps = con.prepareStatement(sql);
+rs = ps.executeQuery();
+
+
+if(!rs.next()) {
+out.println("Not any application is under review!!");
+} 
+else
+{ 
+%>
+<table> <h1>okkk </h1></table>
+<table border="2px solid black">
+<tr>
+  <th scope="col">walletId</th>
+      <th scope="col">userId</th>
+      <th scope="col">Amount</th>
+</tr>
+<tr>
+<%
+int i = 0;
+do{
+	%>
+	<tbody>
+	 <tr>
+	 <td><%= rs.getString("wallet_id") %></td>
+	 <td><%= rs.getString("user_id") %></td>
+	 <td><%= rs.getString("amount") %></td>
+	 <td><a href="test.jsp?sendingid=<%=rs.getString("id")%>"><button type="submit" class="btn btn-primary">View Details </button></a></td>
+	 </tr>
+	<%
+	i++;
+} while(rs.next());
+	
+	%>
+	</tbody>
+</table>
+<%	
+}
+}
+catch(Exception e){	
+}
+%>
+
+
 </body>
 </html>

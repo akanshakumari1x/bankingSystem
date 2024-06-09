@@ -8,9 +8,13 @@
 </head>
 <body>
 
-  <form action="logout" method="post">
-     <input type ="submit" value = "submit"/>
-    </form>
-    
+<h3>
+Your account has been closed !!
+
+</h3>
+
+
+
+
 </body>
 </html>

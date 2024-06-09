@@ -17,7 +17,8 @@
 <%! String url = "jdbc:mysql://localhost:3306/bankingsystem"; %>
 <%! String uid = "root"; %>
 <%! String psw = ""; %>
-<% String sql = "Select * from user_wallet where id = '" + id +"'" ; %>
+<% String sql = "Select * from transaction_table where receiver_id = '" + id +"'" ; %>
+
 
 <%
 Connection con = null;
@@ -38,11 +39,10 @@ out.println("Not any application is under review!!");
 else
 { 
 %>
-<table> <h1>okkk </h1></table>
 <table border="2px solid black">
 <tr>
-  <th scope="col">walletId</th>
-      <th scope="col">userId</th>
+  <th scope="col">SenderID</th>
+      <th scope="col">ReceiverId</th>
       <th scope="col">Amount</th>
 </tr>
 <tr>
@@ -52,10 +52,9 @@ do{
 	%>
 	<tbody>
 	 <tr>
-	 <td><%= rs.getString("wallet_id") %></td>
-	 <td><%= rs.getString("user_id") %></td>
+	 <td><%= rs.getString("sender_id") %></td>
+	 <td><%= rs.getString("receiver_id") %></td>
 	 <td><%= rs.getString("amount") %></td>
-	 <td><a href="test.jsp?sendingid=<%=rs.getString("id")%>"><button type="submit" class="btn btn-primary">View Details </button></a></td>
 	 </tr>
 	<%
 	i++;
@@ -64,7 +63,6 @@ do{
 	%>
 	</tbody>
 </table>
-<h1>Footer </h1>
 <%	
 }
 }

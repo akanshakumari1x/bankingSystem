@@ -50,7 +50,8 @@ do{
 	 <tr>
 	 <td><%= rs.getString("id") %></td>
 	 <td><%= rs.getString("name") %></td>
-	 <td><a href="test.jsp?sendingid=<%=rs.getString("id")%>"><button type="submit" class="btn btn-primary">View Details </button></a></td>
+	<%--  <td><a href="test2.jsp?sendingid=<%=rs.getString("id")%>"><button type="submit" class="btn btn-primary">View Details </button></a></td> --%>
+	 <td><a href="Image">view details</a></td>
 	 </tr>
 	<%
 	i++;

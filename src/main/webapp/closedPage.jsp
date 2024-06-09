@@ -8,9 +8,7 @@
 </head>
 <body>
 
-  <form action="logout" method="post">
-     <input type ="submit" value = "submit"/>
-    </form>
-    
+<h2>You are no longer user for this account holder!! Create a new account.</h2>
+
 </body>
 </html>

@@ -1,5 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+  
+  
+ <%
+ String user = (String)session.getAttribute("userID");
+ if(user == null){
+	 session.setAttribute("login-msg", "please Login first");
+	 response.sendRedirect("login.jsp");
+ } 
+ %>   
+    
+    
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,13 +34,15 @@
 
 <% String username = (String) session.getAttribute("userID"); %>
 
-<p>Username: ${username}</p>
-<h3>Hi <%=username %>, Login successful.</h3>
+<p>Username: ${user}</p>
+<h3>Hi <%=user %>, Login successful.</h3>
+
 
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand">Home</a>
-    <a class="navbar-brand" href="logout.jsp">logout</a>
+ 
+    <a class="btn btn-primary navbar-brand" href="Logout">logout</a>
   </div>
 </nav>
 
@@ -36,17 +52,17 @@
        <div class="row">
           <div class="col-lg-6">
           
-<a href="checkBalance.jsp?sendingId=<%=username %>"class="btn btn-primary btn-lg active" role="button" aria-pressed="true">check Balance</a>
+<a href="checkBalance.jsp?sendingId=<%=user %>"class="btn btn-primary btn-lg active" role="button" aria-pressed="true">check Balance</a>
 <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Withdraw money</a>
-<a href="transaction.jsp?sendingId=<%= username %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transaction  history </a>
+<a href="transactionHistory.jsp?sendingId=<%= user %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transaction  history </a>
             </div>
             </div><br><br>
            <div> 
             <div class="col-lg-6">
           
-<a href="transferMoney.jsp?sendingId=<%=username %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transfer money </a>
-<a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">User Profile</a>
-<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Request to close account</a>
+<a href="transferMoney.jsp?sendingId=<%=user %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Transfer money </a>
+<a href="userProfile.jsp?sendingId=<%=user %>" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">User Profile</a>
+<a href="closeAccount.jsp?sendingId=<%=user %>" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Request to close account</a>
             </div>
         </div> 
  </div>

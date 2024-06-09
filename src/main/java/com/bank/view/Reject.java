@@ -45,7 +45,7 @@ public class Reject extends HttpServlet {
 			Connection con = null;
 			con = JDBC.getConnection();
 			
-			String sql = "update application_status set application_status='rejected', rejectedReason ="+ reason1+ " where user_id = "+ id1;
+			String sql = "update application_status set application_status='rejected', reason ="+ reason1+ " where user_id = "+ id1;
 
 			System.out.println("ps "+ sql); 
 			

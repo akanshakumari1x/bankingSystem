@@ -26,11 +26,20 @@ public class Logout extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 			        HttpSession session = request.getSession(false);
+			        session.removeAttribute("userID");
+			        System.out.println("sessionid "+ session);
+//			        
+//			        HttpSession session2 = request.getSession();
+//			        session.setAttribute("logout-msg", "Logout Successfully");
+			        
+			        
 			        if (session != null) {
-			        	System.out.println("gettig session");
+			        	System.out.println("gettig session ");
 			            session.invalidate(); // Invalidate the session, clearing all session attributes.
 			        }
 			        response.sendRedirect("login.jsp"); // Redirect the user back to the login page after logout.

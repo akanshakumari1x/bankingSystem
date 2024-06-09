@@ -100,10 +100,12 @@ else
 %>
 
 <%
+
 String imagename = rs1.getString("doc_type");
+String doc_name = rs1.getString("doc_name");
 String id11 = rs1.getString("id");
 String path = id+"/"+ imagename;
-String finalpath = "C:/Java/BankingSystem/images/" + path;
+String finalpath = "C:/Java/BankingSystem/images/";
 int i = 0;
 do{
 	%>
@@ -111,7 +113,10 @@ do{
 	 <tr>
 	 <td><%= rs1.getString("doc_type") %></td>
 	 <td><%= rs1.getString("doc_name") %></td>
-	 <img src="IMG-20200130-WA0119.jpg"  alt="Flowers in Chania" width="200px" height="305px">
+	    <td>
+         <img src="<%= finalpath + "/" + path %>" alt="<%= doc_name %>" width="200px" height="305px">
+          </td>
+	 <img src="<%=finalpath +"/" %> IMG-20200130-WA0119.jpg"  alt="Flowers in Chania" width="200px" height="305px">
 	 
      <a href="accept.jsp?sendingid=<%= rs1.getString("user_id") %>" class="btn btn-primary">
         <button type="button" class="btn btn-primary">Accept</button>

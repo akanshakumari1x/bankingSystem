@@ -1,6 +1,7 @@
 package com.bank.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,7 +13,6 @@ import java.util.UUID;
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +44,9 @@ public class Login extends HttpServlet {
 		System.out.println("user" + user + " Password" + password);
 	    String sessionID = null;
 
+	    response.setContentType("text/html;charset=UTF-8");
+	    PrintWriter out = response.getWriter();
+	    
         HttpSession session = request.getSession();
        // session.setAttribute(password, session);
 		try {
@@ -73,15 +76,34 @@ public class Login extends HttpServlet {
 					   System.out.println(" under review ");
 					   rd = request.getRequestDispatcher("OnReview.jsp");
 				   }
+				   else if(userStatus(user).equalsIgnoreCase("closed")) {
+					   System.out.println(" closed account ");
+					   //rd = request.getRequestDispatcher("closedPage.jsp");
+
+					   out.println("<script type=\"text/javascript\">");
+					   out.println("alert('your account has been closed ');");
+					   out.println("location='login.jsp';");
+					   out.println("</script>");
+				   }
 				   else {
 					   if(userStatus(user).equalsIgnoreCase("rejected"))
 					   System.out.println("rejected");
 					   rd =request.getRequestDispatcher("ViewRejected.jsp");
 				   }
 			   }else {
-				   System.out.println(" security");
-				 rd= request.getRequestDispatcher("login.jsp");
-			   }
+//			   {
+				   System.out.println(" else ");
+//				   out.println("<script type=\"text/javascript\">");
+//				   out.println("alert('your account has been closed ');");
+//				   out.println("location='index.jsp';");
+//				   out.println("</script>");
+				}
+			   
+				/*
+				 * else { System.out.println(" security"); rd=
+				 * request.getRequestDispatcher("login.jsp"); }
+				 */
+			   
 			   rd.forward(request, response);
 			    
 		 }catch(Exception e) {
@@ -148,6 +170,9 @@ public class Login extends HttpServlet {
 	        	return "accepted";
 	        }else if(status.equalsIgnoreCase("OnReview")) {
 	        	return "OnReview";
+	        }
+	        else if(status.equalsIgnoreCase("closed")) {
+	        	return "closed";
 	        }
 	        else {
 	        	if(status.equalsIgnoreCase("rejected"))

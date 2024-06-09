@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -113,8 +114,9 @@ public class TransferMoney extends HttpServlet {
 		   
 		   //insert record to transfer table 
 		    
+   			String unique_id = UUID.randomUUID().toString();
 		    PreparedStatement ps33 = con.prepareStatement("insert into transaction_table(id,sender_id,receiver_id,amount) VALUES(?,?,?,?)");
-		    ps33.setInt(1,1);
+		    ps33.setString(1,unique_id);
 		    ps33.setString(2,senderId);
 		    ps33.setString(3, recvId);
 		    ps33.setInt(4, sendAmount);
